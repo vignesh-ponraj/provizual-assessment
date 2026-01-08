@@ -7,9 +7,14 @@ dotenv.config();
 async function scrapeAbileneSite() {
   const apiKey = process.env.STEEL_API_KEY;
 
+  if (!apiKey) {
+    throw new Error('STEEL_API_KEY environment variable is not set');
+  }
+
   const steel = new Steel({ steelAPIKey: apiKey });
 
   const session = await steel.sessions.create();
+  console.log(`Watch live: ${session.sessionViewerUrl}\n`);
 
   const wsEndpoint = `wss://connect.steel.dev?apiKey=${apiKey}&sessionId=${session.id}`;
   const browser = await chromium.connectOverCDP(wsEndpoint);
