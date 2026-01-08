@@ -1,9 +1,10 @@
 {
   "name": "provizual-assessment",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch src --exec ts-node src/index.ts",
+    "dev": "nodemon --watch src --exec node --loader ts-node/esm src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js"
   },
@@ -13,8 +14,19 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^25.0.3",
+    "@types/uuid": "^10.0.0",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "uuid": "^13.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "playwright": "^1.57.0",
+    "steel-sdk": "^0.16.0"
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
   }
 }
